@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<br><br><br>
+
+<a href="{% url 'scan' %}" class="btn btn-danger btn-lg btn-block" value="Nmap">Nmap</a>
+
+<br><br>
+
+<a href="{% url 'who_is' %}" class="btn btn-danger btn-lg btn-block" value="who_is">Whois</a>
+
+<br><br>
+
+<a href="{% url 'past_scanning' %}" class="btn btn-danger btn-lg btn-block" value="past_scanning">Geçmiş Taramalarınız (Nmap)</a>
+
+<br><br>
+
+<a href="{% url 'past_scanning_whois' %}" class="btn btn-danger btn-lg btn-block" value="past_scanning_whois">Geçmiş Taramalarınız (Whois)</a>
+
+
+{% else %}
+<br>
+<h1> Hata ! </h1>
+{% endif %}
+
+{% endblock %}

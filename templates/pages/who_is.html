@@ -1,0 +1,99 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <br><br><br><br>
+    <div class="container">
+
+        <div class="row justify-content-center align-items-center">
+
+            <div class="card my-5 w-25" style="background-color:#696969; border-color:#A52A2A; border-width:10px; color:white;">
+                <div class="card-body">
+                <h5 class="card-title"> <!-- kartın başlık yazısı -->
+                    Whois Sorgulaması
+                    <hr />
+                </h5>
+
+                <p class="card-text"> <!-- kartın içerik yazısı -->
+                    <br>
+                    
+                    <div class="form-group">
+                        <form action="{% url 'who_is' %}" method='POST'>
+                            {% csrf_token %}
+                        <label for="domain">Domain:</label>
+			            <input type="text" name="domain" class="form-control" placeholder="Domain girin..">
+                        <br>
+                        <input type="submit" class="btn btn-danger btn-lg btn-block" value="Sorgula !">
+                        </form>
+                    </div>
+                    
+                </p>
+
+                </div>
+            </div> 
+            <table align="center">
+            {% if domain_name %}
+            <div class="card my-5 w-100" style="background-color:#696969; border-color:#A52A2A; border-width:10px; color:white;">
+                <div class="card-body">
+                <h5 class="card-title">
+                    <br>Sorgulama Sonucu:
+                    <hr color:"#696969"></hr>
+                </h5>
+                <p class="card-text">
+                    <br>
+                        {% if domain_name %}<p align="left" style="color:white;"><b>ALAN ADI:</b> {{ domain_name }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if registrar %}<p align="left" style="color:white;"><b>KAYITLI OLDUĞU YER:</b> {{ registrar }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if whois_server %}<p align="left" style="color:white;"><b>WHOIS SUNUCUSU:</b> {{ whois_server }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if referral_url %}<p align="left" style="color:white;"><b>YÖNLENDİRME URL'İ:</b> {{ referral_url }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if updated_date %}<p align="left" style="color:white;"><b>GÜNCELLEME TARİHİ:</b> {{ updated_date }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if creation_date %}<p align="left" style="color:white;"><b>OLUŞTURULMA TARİHİ:</b> {{ creation_date }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if expiration_date %}<p align="left" style="color:white;"><b>SON KULLANMA TARİHİ:</b> {{ expiration_date }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if name_servers %}<p align="left" style="color:white;"><b>İSİM SUNUCULARI:</b> {{ name_servers }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if status %}<p align="left" style="color:white;"><b>STATÜ:</b> {{ status }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if emails %}<p align="left" style="color:white;"><b>E-MAİLLER:</b> {{ emails }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if dnssec %}<p align="left" style="color:white;"><b>DNSSEC:</b> {{ dnssec }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if name %}<p align="left" style="color:white;"><b>İSİM:</b> {{ name }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if org %}<p align="left" style="color:white;"><b>ORG:</b> {{ org }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if address %}<p align="left" style="color:white;"><b>ADRES:</b> {{ address }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if city %}<p align="left" style="color:white;"><b>ŞEHİR:</b> {{ city }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if state %}<p align="left" style="color:white;"><b>DURUM:</b> {{ state }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if zipcode %}<p align="left" style="color:white;"><b>POSTA KODU:</b> {{ zipcode }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if country %}<p align="left" style="color:white;"><b>ÜLKE:</b> {{ country }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if registrant_name %}<p align="left" style="color:white;"><b>KAYIT SAHİBİ ADI:</b> {{ registrant_name }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if admin %}<p align="left" style="color:white;"><b>YÖNETİCİ:</b> {{ admin }}</p>{% else %}{% endif %}
+                        {% if admin_organization %}<p align="left" style="color:white;"><b>YÖNETİCİ ORGANİZASYONU:</b> {{ admin_organization }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if admin_address %}<p align="left" style="color:white;"><b>YÖNETİCİ ADRESİ:</b> {{ admin_address }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if admin_phone %}<p align="left" style="color:white;"><b>YÖNETİCİ TELEFONU:</b> {{ admin_phone }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if admin_fax %}<p align="left" style="color:white;"><b>YÖNETİCİ FAX:</b> {{ admin_fax }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if tech %}<p align="left" style="color:white;"><b>TEKNOLOJİ:</b> {{ tech }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if tech_organization %}<p align="left" style="color:white;"><b>TEKNİK ORGANİZASYON:</b> {{ tech_organization }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if tech_address %}<p align="left" style="color:white;"><b>TEKNİK ADRES:</b> {{ tech_address }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if tech_phone %}<p align="left" style="color:white;"><b>TEKNİK TELEFON:</b> {{ tech_phone }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if tech_fax %}<p align="left" style="color:white;"><b>TEKNİK FAKS:</b> {{ tech_fax }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if billing %}<p align="left" style="color:white;"><b>FATURALANDIRMA:</b> {{ billing }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if billing_organization %}<p align="left" style="color:white;"><b>FATURALANDIRMA KURULUŞU:</b> {{ billing_organization }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if billing_address %}<p align="left" style="color:white;"><b>FATURA ADRESİ:</b> {{ billing_address }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if billing_phone %}<p align="left" style="color:white;"><b>FATURA TELEFONU:</b> {{ billing_phone }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+                        {% if billing_fax %}<p align="left" style="color:white;"><b>FATURA FAKS:</b> {{ billing_fax }}</p><hr color:"#696969"></hr>{% else %}{% endif %}
+
+                    
+                </p>
+
+                </div>
+            </div>
+                
+            {% else %}
+            {% endif %}
+            </table>
+        </div>
+
+    </div>
+
+    <br><br>
+    
+{% else %}
+<br>
+<h1> Hata ! </h1>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,3 @@
+Django
+python3-nmap
+python-whois

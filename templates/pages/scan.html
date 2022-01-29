@@ -1,0 +1,98 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <br><br><br><br>
+    <div class="container">
+
+        <div class="row justify-content-center align-items-center">
+
+            <div class="card my-5 w-25" style="background-color:#696969; border-color:#A52A2A; border-width:10px; color:white;">
+                <div class="card-body">
+                <h5 class="card-title"> <!-- kartın başlık yazısı -->
+                    Nmap Taraması
+                    <hr />
+                </h5>
+
+                <p class="card-text"> <!-- kartın içerik yazısı -->
+                    <br>
+                    
+                    <div class="form-group">
+                        <form action="{% url 'scan' %}" method='POST'>
+                            {% csrf_token %}
+                        <label for="name">IP Adresi:</label>
+			            <input type="text" name="ip" class="form-control" placeholder="IP girin..">
+                        <br>
+                        <label for="type">Tarama Türü: </label>
+                        <select name="type" class="form-select form-select-sm">
+                            <option value="" selected>Standart</option>
+                            <option value="-sS">TCP Syn Scan</option>
+                            <option value="-sT">TCP Connect Scan</option>
+                            <option value="-sF">FIN Scan</option>
+                            <option value="-sX">Xmas Scan</option>
+                            <option value="-sN">Null Scan</option>
+                            <option value="-sP">Ping Scan</option>
+                            <option value="-sU">UDP Scan</option>
+                            <option value="-sO">IP Protocol Scan</option>
+                            <option value="-sA">ACK Scan</option>
+                            <option value="-sA">Window Scan</option>
+                        </select>      
+                        <br>
+                        <label for="category">Script Kategori: </label>
+                        <select name="category" class="form-select form-select-sm">
+                            <option value="" selected>Script Yok</option>
+                            <option value="safe">Safe</option>
+                            <option value="intrusive">Intrusive</option>
+                            <option value="vuln">Vuln</option>
+                            <option value="exploit">Exploit</option>
+                            <option value="auth">Auth</option>
+                            <option value="brute">Brute</option>
+                            <option value="discovery">Discovery</option>
+                            <option value="default">Default</option>
+                        </select>      
+                        <br>
+                        <input type="submit" class="btn btn-danger btn-lg btn-block" value="Tara !">
+                        </form>
+                    </div>
+                    
+                </p>
+
+                </div>
+            </div> 
+            <div class="clearfix"></div>
+            <table align="center">
+            {% if scan %}
+            <div class="card my-5 w-75" style="background-color:#696969; border-color:#A52A2A; border-width:10px; color:white;">
+                <div class="card-body">
+                <h5 class="card-title">
+                    <br>Tarama Sonucu:
+                    <hr color:"#696969"></hr>
+                </h5>
+                <p class="card-text"><b>Hedef IP:</b> {{targetIP}}<br>
+                    <br>
+                    {% for sc in scan %}
+                        {% if "xxx" in sc %}
+                            <hr color:"#696969"></hr>
+                            <br>
+                        {% else %}
+                            <p align="left" style="color:white;">{{sc}}</p>
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                </div>
+            </div>
+            {% else %}
+            {% endif %}
+            </table>
+        </div>
+
+    </div>
+
+    <br><br>
+    
+{% else %}
+<br>
+<h1> Hata ! </h1>
+{% endif %}
+
+{% endblock %}

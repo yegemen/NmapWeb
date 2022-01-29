@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% if pastscan %}
+    {% for past in pastscan %}
+            <div class="card my-5 w-100" style="background-color:#696969; border-color:#A52A2A; border-width:10px; color:white;">
+                <div class="card-body">
+                <h5 class="card-title"> <!-- kartın başlık yazısı -->
+                    <br>Eski Tarama:
+                    <hr color:"#696969"></hr>
+                </h5>
+
+                <p class="card-text"> <!-- kartın içerik yazısı -->
+                    <br>
+                    
+                    
+                        <p align="left" style="color:white;"><b>IP ADRESİ: </b>{{past.host_ip}}</p><hr color:"#696969"></hr>
+                        <p align="left" style="color:white;"><b>PORTLAR: </b>{{past.port}}</p><hr color:"#696969"></hr>
+                        <p align="left" style="color:white;"><b>DURUM: </b>{{past.state}}</p><hr color:"#696969"></hr>
+                        <p align="left" style="color:white;"><b>SERVİSLER: </b>{{past.service}}</p><hr color:"#696969"></hr>
+                        <p align="left" style="color:white;"><b>SCRIPT SONUCU: </b>{{past.script}}</p><hr color:"#696969"></hr>
+                        <p align="left" style="color:white;"><b>TARAMA TÜRÜ: </b>{{past.scan_type}}</p><hr color:"#696969"></hr>
+                        <p align="left" style="color:white;"><b>TARİH: </b>{{past.scan_date}}</p><hr color:"#696969"></hr>
+                    
+                    
+                </p>
+
+                </div>
+            </div>
+    
+    {% endfor %}
+            {% else %}
+            <p align="left" style="color:white;">Eski Tarama Bulunmamaktadır.</p><hr color:"#696969">
+    {% endif %}
+{% endblock %}
